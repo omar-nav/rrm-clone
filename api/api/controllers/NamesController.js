@@ -3,7 +3,7 @@ module.exports = {
     console.log("Insert name!")
     console.log(req.body)
     const { name } = req.body
-    NamesService.insertNameToDB(name)
+    NamesService.insertNameToDB(name, res)
   },
   getNames: (req, res) => {
     console.log("Get names!")

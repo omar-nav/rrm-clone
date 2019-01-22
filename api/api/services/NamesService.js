@@ -4,7 +4,7 @@ const url = "mongodb://localhost:27017"
 const dbName = "rrmclone"
 
 module.exports = {
-  insertNameToDB: name => {
+  insertNameToDB: (name, res) => {
     console.log("Inserting to DB!")
 
     MongoClient.connect(
@@ -26,6 +26,7 @@ module.exports = {
             // Show that duplicate records got dro
             console.log(result)
             client.close()
+            res.status(200).send({ msg: "nombre agregado" })
           }
         )
       }
@@ -50,7 +51,9 @@ module.exports = {
               console.warn(err.message) // returns error if no matching object found
             } else {
               console.log(result)
-              res.status(200).send({ result })
+              res
+                .status(200)
+                .send({ result: result, msg: "aqui van todos los nombres!!" })
             }
             client.close()
           })
