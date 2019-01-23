@@ -1,9 +1,11 @@
 <template>
-  <div class="name">
+  <div class="newName">
     <p>hola mundo!</p>
     <!-- recibe el objectID -->
     <!-- por el metodo router de vue -->
     <p>{{specificName}}</p>
+    <input v-model="newName">
+    <button @click="sendNewName()">Send name to API</button>
   </div>
 </template>
 
@@ -15,7 +17,8 @@ export default {
   components: {},
   data() {
     return {
-      specificName: {}
+      specificName: {},
+      newName: "new name to send back"
     };
   },
   mounted: function() {
@@ -35,6 +38,21 @@ export default {
         .then(response => {
           console.log(response);
           this.specificName = response.data.result;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    sendNewName() {
+      console.log("Send to API!");
+
+      axios
+        .put("http://localhost:1337/specificname", {
+          id: this.$route.params.id,
+          newName: this.newName
+        })
+        .then(function(response) {
+          console.log(response);
         })
         .catch(function(error) {
           console.log(error);

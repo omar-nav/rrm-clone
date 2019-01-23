@@ -13,5 +13,9 @@ module.exports = {
   getSpecificName: (req, res) => {
     console.log("get single name")
     NamesService.getSpecificNameFromDB(req, res)
+  },
+  sendNewName: (req, res) => {
+    console.log("sending da new name")
+    NamesService.insertNewNameToDB(req, res)
   }
 }

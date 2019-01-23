@@ -33,5 +33,6 @@ module.exports.routes = {
 
   "POST /name": "NamesController.insertName",
   "GET /name": "NamesController.getNames",
-  "GET /specificname": "NamesController.getSpecificName"
+  "GET /specificname": "NamesController.getSpecificName",
+  "PUT /specificname": "NamesController.sendNewName"
 }

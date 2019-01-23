@@ -6,7 +6,7 @@ const ObjectID = require("mongodb").ObjectID
 
 module.exports = {
   insertNameToDB: (name, res) => {
-    console.log("Inserting to DB!")
+    console.log("Inserting brand new name to DB!")
 
     MongoClient.connect(
       url,
@@ -89,6 +89,37 @@ module.exports = {
             }
             client.close()
           })
+      }
+    )
+  },
+  insertNewNameToDB: (req, res) => {
+    console.log("Inserting new name to DB!")
+
+    MongoClient.connect(
+      url,
+      (err, client) => {
+        test.equal(null, err)
+        // Create a collection we want to drop later
+        const col = client.db(dbName).collection("names")
+        // get all documents
+        col.findOneAndUpdate(
+          //query for that specific _id
+          { _id: ObjectID(req.allParams().id) },
+          { $set: { name: req.allParams().newName } },
+          { upsert: true },
+          (err, result) => {
+            if (err) {
+              console.warn(err.message) // returns error if no matching object found
+            } else {
+              console.log("result", result)
+              res.status(200).send({
+                result: result,
+                msg: "cambie el nombre!!"
+              })
+            }
+            client.close()
+          }
+        )
       }
     )
   }
