@@ -9,5 +9,9 @@ module.exports = {
     console.log("Get names!")
     console.log(req.body)
     NamesService.getNamesFromDB(res)
+  },
+  getSpecificName: (req, res) => {
+    console.log("get single name")
+    NamesService.getSpecificNameFromDB(req, res)
   }
 }

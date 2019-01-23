@@ -3,6 +3,7 @@
     <p>hola mundo!</p>
     <!-- recibe el objectID -->
     <!-- por el metodo router de vue -->
+    <p>{{specificName}}</p>
   </div>
 </template>
 
@@ -13,8 +14,32 @@ export default {
   name: "name",
   components: {},
   data() {
-    return {};
+    return {
+      specificName: {}
+    };
   },
-  methods: {}
+  mounted: function() {
+    // method will execute on page load
+    this.getSpecificName();
+  },
+  methods: {
+    getSpecificName() {
+      console.log("getting specific name!");
+
+      axios
+        .get("http://localhost:1337/specificname", {
+          params: {
+            id: this.$route.params.id
+          }
+        })
+        .then(response => {
+          console.log(response);
+          this.specificName = response.data.result;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }
 };
 </script>
