@@ -17,5 +17,9 @@ module.exports = {
   sendNewName: (req, res) => {
     console.log("sending da new name")
     NamesService.insertNewNameToDB(req, res)
+  },
+  deleteNameById: (req, res) => {
+    console.log("deleting name by its id")
+    NamesService.deleteNameFromDB(req, res)
   }
 }

@@ -6,6 +6,7 @@
     <button @click="showAll()">Show all names</button>
     <p v-for="name in names">
       <router-link :to="'/name/'+ name._id">{{name.name}}</router-link>
+      <button @click="deleteById(name._id)">delete</button>
     </p>
   </div>
 </template>
@@ -45,6 +46,21 @@ export default {
         .then(response => {
           console.log(response);
           this.names = response.data.result;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    deleteById(idOfName) {
+      console.log("Send to API!");
+
+      axios
+        .delete("http://localhost:1337/specificname", {
+          data: { id: idOfName }
+        })
+        .then(response => {
+          console.log(response);
+          this.showAll();
         })
         .catch(function(error) {
           console.log(error);

@@ -123,5 +123,34 @@ module.exports = {
         )
       }
     )
+  },
+  deleteNameFromDB: (req, res) => {
+    console.log("Delete this ID from db: ", req.allParams())
+
+    MongoClient.connect(
+      url,
+      (err, client) => {
+        test.equal(null, err)
+        // Create a collection we want to drop later
+        const col = client.db(dbName).collection("names")
+        // get all documents
+        col.deleteOne(
+          //query for that specific _id
+          { _id: ObjectID(req.allParams().id) },
+          (err, result) => {
+            if (err) {
+              console.warn(err.message) // returns error if no matching object found
+            } else {
+              console.log("result", result)
+              res.status(200).send({
+                result: result,
+                msg: "borre el nombre!!"
+              })
+            }
+            client.close()
+          }
+        )
+      }
+    )
   }
 }
