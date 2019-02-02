@@ -114,7 +114,8 @@ module.exports = {
               console.log("result", result)
               res.status(200).send({
                 result: result,
-                msg: "cambie el nombre!!"
+                msg: "cambie el nombre!!",
+                newName: req.allParams().newName
               })
             }
             client.close()

@@ -51,8 +51,9 @@ export default {
           id: this.$route.params.id,
           newName: this.newName
         })
-        .then(function(response) {
-          console.log(response);
+        .then(response => {
+          console.log(response.data.newName);
+          this.specificName = response.data.newName;
         })
         .catch(function(error) {
           console.log(error);

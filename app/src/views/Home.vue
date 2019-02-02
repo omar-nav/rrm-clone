@@ -4,7 +4,9 @@
     <p>{{name}}</p>
     <button @click="send()">Send name to API</button>
     <button @click="showAll()">Show all names</button>
-    <p v-for="name in names">{{name.name}}</p>
+    <p v-for="name in names">
+      <router-link :to="'/name/'+ name._id">{{name.name}}</router-link>
+    </p>
   </div>
 </template>
 
