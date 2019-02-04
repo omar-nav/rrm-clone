@@ -19,7 +19,7 @@ export default {
   components: {},
   data() {
     return {
-      name: "Jorge",
+      name: "AMLO",
       names: []
     };
   },
@@ -31,8 +31,9 @@ export default {
         .post("http://localhost:1337/name", {
           name: this.name
         })
-        .then(function(response) {
+        .then(response => {
           console.log(response);
+          this.showAll();
         })
         .catch(function(error) {
           console.log(error);
